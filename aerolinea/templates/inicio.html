@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/inicio.css' %}">
+</head>
+<body>
+    <div id="header">
+        <img id="logo" src="{% static 'media/img/image002.png' %}">
+        <h1>Operations</h1>
+    </div>
+    {% if data %}
+        <table cellspacing="0" id="main-table">
+            <tr>
+                <th colspan="3" class="cambio-seccion"></th>
+                <th colspan="3" class="cambio-seccion">ARRIVALS</th>
+                <th colspan="3">DEPARTURES</th>
+            </tr>
+            <tr>
+                <th>Flight Number</th>
+                <th>IATA</th>
+                <th class="cambio-seccion">ICAO</th>
+                <!-- Arrivals -->
+                <th>Airport</th>
+                <th>IATA</th>
+                <th class="cambio-seccion">Scheduled</th>
+                <!-- Departures -->
+                <th>Airport</th>
+                <th>IATA</th>
+                <th>Scheduled</th>
+            </tr>
+            <tr>
+                <!-- From the API -->
+                {% for i in data %}
+                <tr>
+                    <td>
+                        {{ i.name }}
+                    </td>
+                    <td>
+                        {{ i.base_experience }}
+                    </td>
+                    <td class="cambio-seccion">
+                        {{ i.weight }}
+                    </td>
+                    <td>
+                        {{ i.id }}
+                    </td>
+                    <td>
+                        {{ i.is_default }}
+                    </td>
+                    <td class="cambio-seccion">
+                        {{ i.height }}
+                    </td>
+                    <td>prueba</td>
+                    <td>prueba</td>
+                    <td>prueba</td>
+                </tr>
+                {% endfor %}
+                <!-- From the database -->
+                <!--{% for i in flights %}
+                    <tr>
+                        <td>{{ i.flight_number }}</td>
+                        <td>{{ i.iata }}</td>
+                        <td>{{ i.icao }}</td>
+                        <td>{{ i.airport_arrival }}</td>
+                        <td>{{ i.iata_arrival }}</td>
+                        <td>{{ i.scheduled_arrival }}</td>
+                        <td>{{ i.airport_departure }}</td>
+                        <td>{{ i.iata_departure }}</td>
+                        <td>{{ i.scheduled_departure }}</td>
+                    </tr>
+                {% endfor %}
+                -->
+            </tr>
+        </table>
+    {% else %}
+        <p>The table is empty.</p>
+    {% endif %}
+    <p>Number of rows: {{count}}</p>
+    <p>Loading time: {{time}}</p>
+    <button id="add-button">Add row</button>
+    <div id="ventana-emergente">
+        <div id="ventana-contenido">
+            <p>New flight detected.</p>
+            <button id="close-button">OK</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="{% static 'script/inicio.js' %}"></script>
+</body>
+</html>
